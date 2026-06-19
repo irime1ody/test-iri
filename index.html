@@ -6,11 +6,12 @@
     <title>Sarita Payment</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body {
-            font-family: 'Itim', cursive;
+            font-family: 'Prompt', sans-serif;
+            /* เปลี่ยนพื้นหลังเป็นสีที่กำหนด */
             background: linear-gradient(135deg, #CFCFCF 0%, #FFBBFF 100%);
             min-height: 100vh;
         }
@@ -21,6 +22,7 @@
         }
         
         .anim-float-1 { animation: float-up-down 4s ease-in-out infinite; }
+        .anim-float-2 { animation: float-up-down 5s ease-in-out infinite 1.5s; }
         
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
@@ -34,91 +36,99 @@
         .virtual-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .virtual-card:hover { transform: translateY(-4px); }
         
+        /* หัวใจขยับๆ */
         .heart-beat { animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
         
         ::-webkit-scrollbar { width: 0px; }
     </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#EDE986',
+                        secondary: '#93ABD9',
+                        brown: { 400: '#8c8c8c', 500: '#5c5c5c', 600: '#333333' }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="flex flex-col items-center py-6 px-4 text-gray-700 relative overflow-x-hidden">
+<body class="flex flex-col items-center py-6 px-4 text-brown-600 relative overflow-x-hidden">
 
-    <!-- Toast แจ้งเตือนคัดลอก -->
-    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800/95 backdrop-blur-sm text-white px-6 py-3 rounded-full shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 font-medium text-sm">
+    <!-- ตกแต่งฉากหลัง -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <svg class="absolute top-[5%] left-[10%] w-8 h-8 text-white/50 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+    </div>
+
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-brown-600/95 backdrop-blur-sm text-white px-6 py-3 rounded-full shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 font-medium text-sm">
         คัดลอกเลขบัญชีแล้ว
     </div>
 
     <div class="max-w-[420px] w-full relative z-10 space-y-5 pb-10">
-        <div class="text-center pt-2 pb-2">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-700">
+        
+        <div class="text-center pt-2 pb-2 relative">
+            <h1 class="text-2xl font-bold tracking-tight text-brown-600">
                 Sarita Payment <span class="heart-beat inline-block text-red-500">♥</span>
             </h1>
-            <p class="text-lg font-medium text-gray-500 mt-1">irime1ody & Sarita</p>
+            <p class="text-sm font-medium text-brown-500 mt-1">irime1ody & Sarita</p>
         </div>
 
-        <div class="glass-card rounded-[40px] p-4">
+        <div class="glass-card rounded-[40px] p-4 relative z-10">
             <div class="rounded-[28px] overflow-hidden mb-6 border-[4px] border-white shadow-lg">
                 <img src="https://i.postimg.cc/cCwhs5s3/p-ayb-ych.png" alt="Payment Info" class="w-full h-auto">
             </div>
 
             <div class="space-y-5">
                 <div class="text-center space-y-3">
-                    <p class="text-lg font-medium leading-relaxed text-gray-700">
+                    <p class="text-[15px] font-medium leading-relaxed text-brown-600">
                         เลขบัญชีที่ร้านตามนี้เลยน้า <span class="heart-beat inline-block text-red-500">♥</span><br>
-                        ชื่อบัญชี <span class="text-blue-600 font-bold bg-white/50 px-2 py-0.5 rounded-lg border border-blue-200">สริตา สวนพลูหลวง</span> เท่านั้นน !!
+                        ชื่อบัญชี <span class="text-secondary font-bold bg-white/50 px-2 py-0.5 rounded-lg border border-secondary/20">สริตา สวนพลูหลวง</span> เท่านั้นน !!
                     </p>
                 </div>
 
                 <div class="space-y-4">
                     <!-- KBank -->
-                    <div class="virtual-card bg-gradient-to-br from-[#EDE986] to-[#d4d075] rounded-[24px] p-5 shadow-lg">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-bold text-white text-xl">KBank</span>
-                            <div class="text-white/90 text-sm">กสิกร (สริตา)</div>
+                    <div class="virtual-card bg-gradient-to-br from-primary to-[#d4d075] rounded-[24px] p-5 shadow-lg cursor-pointer" onclick="copyText('136-1-12252-2', this)">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">KBank</span>
+                            <button class="btn border-2 border-dashed border-white/50 text-white text-[12px] font-bold px-3 py-1 rounded-full hover:bg-white/20 transition-all">คัดลอก</button>
                         </div>
-                        <div class="flex justify-between items-center mt-3">
-                            <div class="text-white font-bold text-2xl tracking-wider">136-1-12252-2</div>
-                            <button class="btn border-2 border-dashed border-[#CFCFCF] text-white text-[14px] font-bold px-4 py-1 rounded-full hover:bg-white/20 active:scale-95 transition-all" onclick="copyText('136-1-12252-2', this)">
-                                คัดลอก
-                            </button>
-                        </div>
+                        <div class="text-white/80 text-[11px]">กสิกร (สริตา)</div>
+                        <div class="text-white font-bold text-xl">136-1-12252-2</div>
                     </div>
 
                     <!-- SCB -->
-                    <div class="virtual-card bg-gradient-to-br from-[#93ABD9] to-[#7a8ebf] rounded-[24px] p-5 shadow-lg">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-bold text-white text-xl">SCB</span>
-                            <div class="text-white/90 text-sm">ไทยพาณิชย์ (สริตา)</div>
+                    <div class="virtual-card bg-gradient-to-br from-secondary to-[#7a8ebf] rounded-[24px] p-5 shadow-lg cursor-pointer" onclick="copyText('575-496582-9', this)">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">SCB</span>
+                            <button class="btn border-2 border-dashed border-white/50 text-white text-[12px] font-bold px-3 py-1 rounded-full hover:bg-white/20 transition-all">คัดลอก</button>
                         </div>
-                        <div class="flex justify-between items-center mt-3">
-                            <div class="text-white font-bold text-2xl tracking-wider">575-496582-9</div>
-                            <button class="btn border-2 border-dashed border-[#FFBBFF] text-white text-[14px] font-bold px-4 py-1 rounded-full hover:bg-white/20 active:scale-95 transition-all" onclick="copyText('575-496582-9', this)">
-                                คัดลอก
-                            </button>
-                        </div>
+                        <div class="text-white/80 text-[11px]">ไทยพาณิชย์ (สริตา)</div>
+                        <div class="text-white font-bold text-xl">575-496582-9</div>
                     </div>
 
                     <!-- TrueMoney -->
-                    <div class="virtual-card bg-orange-400 rounded-[24px] p-5 shadow-lg">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-bold text-white text-xl">TrueMoney</span>
-                            <div class="text-white/90 text-sm">ทรูมันนี่ (สริตา) <span class="bg-white/20 px-1.5 py-0.5 rounded text-xs">บวกเพิ่ม+2</span></div>
+                    <div class="virtual-card bg-orange-400 rounded-[24px] p-5 shadow-lg cursor-pointer" onclick="copyText('064-208-0051', this)">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">TrueMoney</span>
+                            <button class="btn border-2 border-dashed border-white/50 text-white text-[12px] font-bold px-3 py-1 rounded-full hover:bg-white/20 transition-all">คัดลอก</button>
                         </div>
-                        <div class="flex justify-between items-center mt-3">
-                            <div class="text-white font-bold text-2xl tracking-wider">064-208-0051</div>
-                            <button class="btn border-2 border-dashed border-[#CFCFCF] text-white text-[14px] font-bold px-4 py-1 rounded-full hover:bg-white/20 active:scale-95 transition-all" onclick="copyText('064-208-0051', this)">
-                                คัดลอก
-                            </button>
-                        </div>
+                        <div class="text-white/80 text-[11px]">ทรูมันนี่ (สริตา) <span class="bg-white/20 px-1 rounded">บวกเพิ่ม+2</span></div>
+                        <div class="text-white font-bold text-xl">064-208-0051</div>
                     </div>
                 </div>
 
-                <div class="bg-white/50 rounded-2xl p-4 text-base text-gray-700">
+                <div class="bg-white/50 rounded-2xl p-4 text-[13px] text-brown-600">
                     <p class="font-bold mb-1">!!ป้องกันการโดนแอบอ้าง!!</p>
                     <p>เขียนที่บันทึกช่วยจำ:<br>"ยินยอมโอนเงินให้ FBสริตา า."</p>
                     <p class="mt-2 text-red-500 font-bold">หากลืมโอนเพิ่ม 1 บาท</p>
                 </div>
 
-                <div class="text-center text-base font-bold text-gray-700">
+                <div class="text-center text-[13px] font-bold text-brown-600">
                     ชำระเงินเรียบร้อยแล้ว รบกวนแจ้งสลิปทุกครั้งด้วยนะคะ <span class="heart-beat inline-block text-red-500">♥</span>
                 </div>
             </div>
@@ -126,22 +136,18 @@
     </div>
 
     <script>
-        function copyText(text, btnElement) {
+        function copyText(text, containerElement) {
             navigator.clipboard.writeText(text);
             showToast();
-            
-            const originalText = btnElement.innerText;
-            btnElement.innerText = 'คัดลอกสำเร็จ';
-            btnElement.classList.replace('border-dashed', 'border-solid');
-            btnElement.classList.add('bg-white/20');
-            
+            const btn = containerElement.querySelector('.btn');
+            const original = btn.innerText;
+            btn.innerText = 'คัดลอกสำเร็จ';
+            btn.classList.replace('border-dashed', 'border-solid');
             setTimeout(() => {
-                btnElement.innerText = originalText;
-                btnElement.classList.replace('border-solid', 'border-dashed');
-                btnElement.classList.remove('bg-white/20');
+                btn.innerText = original;
+                btn.classList.replace('border-solid', 'border-dashed');
             }, 2000);
         }
-
         function showToast() {
             const toast = document.getElementById('toast');
             toast.classList.remove('opacity-0', 'translate-y-4');
