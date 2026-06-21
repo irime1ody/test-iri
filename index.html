@@ -1,199 +1,250 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinkjulieland Payment</title>
+    <title>Aesthetic Space</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body {
             font-family: 'Prompt', sans-serif;
-            background: linear-gradient(135deg, #FFE5EC 0%, #FFF4C7 100%);
+            background: linear-gradient(135deg, #FFE5EC 0%, #FFF4C7 50%, #E8F0FE 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
         }
-        
-        @keyframes float-up-down {
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Animation */
+        @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(10deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
         }
-        @keyframes float-left-right {
-            0%, 100% { transform: translateX(0px) rotate(0deg); }
-            50% { transform: translateX(15px) rotate(-10deg); }
-        }
-        @keyframes pulse-soft {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+        .anim-float { animation: float 6s ease-in-out infinite; }
+        .anim-float-delayed { animation: float 5s ease-in-out infinite 2s; }
 
-        @keyframes dash-animation {
-            from { stroke-dashoffset: 0; }
-            to { stroke-dashoffset: -24; }
+        /* Custom Glassmorphism */
+        .glass-main {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 25px 50px -12px rgba(244, 114, 182, 0.15);
         }
-        .animate-dash {
-            animation: dash-animation 1s linear infinite;
-        }
-
-        .anim-float-1 { animation: float-up-down 4s ease-in-out infinite; }
-        .anim-float-2 { animation: float-up-down 5s ease-in-out infinite 1.5s; }
-        .anim-float-3 { animation: float-left-right 6s ease-in-out infinite; }
-        .anim-float-4 { animation: float-left-right 4.5s ease-in-out infinite 2s; }
-        .anim-pulse { animation: pulse-soft 3s ease-in-out infinite; }
-        .anim-spin { animation: spin-slow 8s linear infinite; }
-
+        
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 1);
-            box-shadow: 0 20px 50px -10px rgba(244, 114, 182, 0.15), 
-                        inset 0 2px 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .virtual-card {
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .virtual-card:hover {
+        .glass-card:hover {
             transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.05);
         }
-        .virtual-card:active {
-            transform: translateY(2px) scale(0.98);
+
+        /* Active Tab Styling */
+        .tab-active {
+            background-color: white;
+            color: #ec4899;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        
-        ::-webkit-scrollbar {
-            width: 0px;
-        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { width: 0px; }
     </style>
-    
+</head>
+<body class="flex items-center justify-center py-10 px-4 relative overflow-x-hidden select-none">
+
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <i class="fa-solid fa-heart absolute text-pink-300/40 text-3xl top-[10%] left-[8%] anim-float"></i>
+        <i class="fa-solid fa-star absolute text-yellow-300/50 text-2xl top-[25%] right-[10%] anim-float-delayed"></i>
+        <i class="fa-solid fa-cloud absolute text-white/60 text-4xl bottom-[30%] left-[5%] anim-float-delayed"></i>
+        <i class="fa-solid fa-sparkles absolute text-pink-400/40 text-xl bottom-[15%] right-[12%] anim-float"></i>
+    </div>
+
+    <div class="max-w-[430px] w-full glass-main rounded-[38px] p-4 relative z-10 shadow-2xl">
+        
+        <div class="flex flex-col items-center text-center mt-4 mb-6">
+            <div class="relative p-1 bg-gradient-to-tr from-pink-300 to-yellow-200 rounded-full shadow-md mb-3">
+                <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden border-2 border-white">
+                    <i class="fa-solid fa-user-astronaut text-4xl text-pink-400"></i>
+                </div>
+                <span class="absolute bottom-1 right-1 bg-green-400 w-4 h-4 rounded-full border-2 border-white flex items-center justify-center"></span>
+            </div>
+            
+            <h1 class="text-xl font-bold text-gray-800 tracking-wide flex items-center gap-1.5" style="font-family: 'Fredoka', sans-serif;">
+                Welcome to My Space ✨
+            </h1>
+            <p class="text-xs text-gray-500 mt-1 font-medium">✦ สเปซรวมช่องทางติดต่อและชำระเงิน ✦</p>
+        </div>
+
+        <div class="bg-gray-200/50 backdrop-blur-sm p-1 rounded-2xl flex items-center justify-between mb-5 font-medium text-sm text-gray-600">
+            <button onclick="switchTab('payment')" id="btn-payment" class="w-1/2 py-2.5 rounded-xl transition-all duration-300 tab-active flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wallet text-xs"></i> ช่องทางชำระเงิน
+            </button>
+            <button onclick="switchTab('contact')" id="btn-contact" class="w-1/2 py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-comment-dots text-xs"></i> ช่องทางติดต่อ
+            </button>
+        </div>
+
+        <div id="tab-payment" class="space-y-4">
+            
+            <div class="glass-card rounded-2xl p-4 flex items-center justify-between relative overflow-hidden group">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-purple-600 text-white flex items-center justify-center text-lg font-bold shadow-md shadow-purple-200">
+                        <i class="fa-solid fa-b"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-purple-600 font-bold uppercase tracking-wider">Siam Commercial Bank</p>
+                        <p class="text-base font-bold text-gray-700 tracking-wide mt-0.5">000-0-00000-0</p>
+                        <p class="text-[11px] text-gray-400 font-medium">ชื่อบัญชี: สมมุติ เงินทองดี</p>
+                    </div>
+                </div>
+                <button onclick="copyText('0000000000', this)" class="bg-purple-50 hover:bg-purple-100 text-purple-600 px-3 py-2 rounded-xl text-xs font-bold transition-colors duration-200 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span>คัดลอก</span>
+                </button>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 flex items-center justify-between relative overflow-hidden group">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold shadow-md shadow-emerald-200">
+                        <i class="fa-solid fa-k"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Kasikorn Bank</p>
+                        <p class="text-base font-bold text-gray-700 tracking-wide mt-0.5">111-1-11111-1</p>
+                        <p class="text-[11px] text-gray-400 font-medium">ชื่อบัญชี: สมมุติ เงินทองดี</p>
+                    </div>
+                </div>
+                <button onclick="copyText('1111111111', this)" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-600 px-3 py-2 rounded-xl text-xs font-bold transition-colors duration-200 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> <span>คัดลอก</span>
+                </button>
+            </div>
+
+            <div class="bg-pink-50/70 border border-pink-200/60 rounded-2xl p-4 text-center mt-2">
+                <p class="text-xs text-pink-700 font-medium leading-relaxed">
+                    <i class="fa-solid fa-circle-exclamation text-pink-500 mr-1"></i>
+                    <span class="font-bold">สำคัญมาก:</span> กรุณาแนบสลิปพร้อมระบุข้อความบันทึกช่วยจำทุกครั้งหลังจากโอนเงินเสร็จสิ้น เพื่อความรวดเร็วในการตรวจสอบค่ะ
+                </p>
+            </div>
+
+        </div>
+
+        <div id="tab-contact" class="space-y-3.5 hidden">
+            
+            <a href="#" target="_blank" class="glass-card rounded-2xl p-4 flex items-center justify-between group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-700">Facebook Page</p>
+                        <p class="text-xs text-gray-400 mt-0.5">ติดต่อสอบถามข้อมูลเพิ่มเติม</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-pink-400 transition-colors duration-200 text-xs mr-1"></i>
+            </a>
+
+            <a href="#" target="_blank" class="glass-card rounded-2xl p-4 flex items-center justify-between group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-500 text-white flex items-center justify-center text-lg">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-700">Instagram</p>
+                        <p class="text-xs text-gray-400 mt-0.5">ติดตามอัปเดตผลงานประจำวัน</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-pink-400 transition-colors duration-200 text-xs mr-1"></i>
+            </a>
+
+            <a href="#" target="_blank" class="glass-card rounded-2xl p-4 flex items-center justify-between group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-lg">
+                        <i class="fa-brands fa-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-700">Line Official Account</p>
+                        <p class="text-xs text-gray-400 mt-0.5">สั่งซื้อสินค้าหรือแจ้งปัญหากับทีมงาน</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-pink-400 transition-colors duration-200 text-xs mr-1"></i>
+            </a>
+
+        </div>
+
+        <div class="text-center text-[10px] text-gray-400 mt-6 mb-2 tracking-wider uppercase font-medium">
+            Designed with <i class="fa-solid fa-heart text-pink-400 animate-pulse"></i> by YourBrand
+        </div>
+
+    </div>
+
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-900/90 backdrop-blur-md text-white px-5 py-2.5 rounded-full shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 text-xs font-medium tracking-wide">
+        <i class="fa-solid fa-circle-check text-green-400 text-sm"></i>
+        <span>คัดลอกเลขบัญชีไปยังคลิปบอร์ดแล้ว!</span>
+    </div>
+
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: { 50: '#fffdfa', 100: '#fdf5ee', 200: '#fae8d4' },
-                        brown: { 300: '#d4b49e', 400: '#bc9680', 500: '#8b5e3c', 600: '#5c3d26' },
-                        pink: { 50: '#fff0f5', 100: '#ffe0ec', 200: '#ffc2d9', 300: '#ffa3c6', 400: '#ff85b3', 500: '#ff66a0' }
-                    }
-                }
+        // Tab Switcher Function
+        function switchTab(tabName) {
+            const tabPayment = document.getElementById('tab-payment');
+            const tabContact = document.getElementById('tab-contact');
+            const btnPayment = document.getElementById('btn-payment');
+            const btnContact = document.getElementById('btn-contact');
+
+            if (tabName === 'payment') {
+                tabPayment.classList.remove('hidden');
+                tabContact.classList.add('hidden');
+                btnPayment.classList.add('tab-active');
+                btnContact.classList.remove('tab-active');
+            } else {
+                tabPayment.classList.add('hidden');
+                tabContact.classList.remove('hidden');
+                btnPayment.classList.remove('tab-active');
+                btnContact.classList.add('tab-active');
             }
         }
-    </script>
-</head>
-<body class="flex flex-col items-center py-6 px-4 text-brown-600 relative overflow-x-hidden">
 
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <svg class="absolute top-[5%] left-[10%] w-8 h-8 text-pink-300 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute top-[15%] left-[2%] w-6 h-6 text-white/60 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[8%] left-[25%] w-4 h-4 text-pink-400/50 anim-float-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
-        <svg class="absolute top-[10%] right-[8%] w-10 h-10 text-pink-200 anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[2%] right-[20%] w-5 h-5 text-white/80 anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute top-[40%] -left-2 w-12 h-12 text-pink-100 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[50%] right-[2%] w-6 h-6 text-pink-300 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="absolute bottom-[10%] left-[10%] w-8 h-8 text-pink-200 anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute bottom-[5%] right-[15%] w-7 h-7 text-white/70 anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute bottom-[20%] right-[5%] w-4 h-4 text-pink-400/40 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
-    </div>
-
-    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-brown-500/95 backdrop-blur-sm text-cream-50 px-6 py-3 rounded-full shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 font-medium text-sm border border-brown-400">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-pink-200">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        คัดลอกเลขบัญชีแล้ว
-    </div>
-
-    <div class="max-w-[420px] w-full relative z-10 space-y-5 pb-10">
-        
-        <div class="text-center pt-2 pb-2 relative">
-            <h1 class="text-2xl font-bold tracking-tight text-pink-500 flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-pink-400 anim-pulse"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" /></svg>
-                Howtopay
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-pink-400 anim-pulse transform -scale-x-100"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" /></svg>
-            </h1>
-            <p class="text-sm font-medium text-brown-400 mt-1">𓂂ׁ⠀았  Mn cakn & Ir4ngelis ㅉׁ⠀𓈒</p>
-        </div>
-
-        <div class="glass-card rounded-[40px] p-3 relative z-10">
-            <div class="relative p-2 rounded-[36px] z-10">
-                <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="34" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="12 12" stroke-linecap="round" class="animate-dash" />
-                </svg>
-                <div class="rounded-[28px] overflow-hidden relative shadow-sm border-[4px] border-white">
-                    <img src="https://i.postimg.cc/Cdpgm74p/Payment.png" alt="Payment" class="w-full h-auto object-cover">
-                </div>
-            </div>
-
-            <div class="p-4 pt-6 space-y-5">
-                <div class="text-center space-y-3">
-                    <p class="text-[15px] font-bold leading-relaxed text-brown-600">
-                        ชื่อบัญชี เนตรนภา นันทะเสน<br>
-                        <span class="text-[13px] font-medium text-pink-500">เช็คชื่อบัญชีก่อนโอนนะคะ</span>
-                    </p>
-                </div>
-
-                <div class="flex items-center gap-3 py-2">
-                    <div class="h-px bg-pink-100 flex-1"></div>
-                    <span class="text-[11px] font-semibold text-pink-300 tracking-wider uppercase">ช่องทางชำระเงิน</span>
-                    <div class="h-px bg-pink-100 flex-1"></div>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="virtual-card relative bg-gradient-to-br from-purple-500 to-indigo-600 rounded-[24px] p-5 shadow-lg overflow-hidden cursor-pointer border border-white/20" onclick="copyText('2712597515', this, 'scb')">
-                        <div class="relative z-10 flex flex-col gap-4">
-                            <div class="flex justify-between items-center text-white">
-                                <span class="font-bold text-sm">ธนาคารไทยพาณิชย์ ( SCB )</span>
-                                <span class="scb-btn text-[12px] font-bold bg-white/20 px-3 py-1 rounded-full">คัดลอก</span>
-                            </div>
-                            <div class="text-white font-bold text-[22px] tracking-widest">271-259751-5</div>
-                        </div>
-                    </div>
-
-                    <div class="virtual-card relative bg-gradient-to-br from-green-500 to-emerald-600 rounded-[24px] p-5 shadow-lg overflow-hidden cursor-pointer border border-white/20" onclick="copyText('1173367607', this, 'kbank')">
-                        <div class="relative z-10 flex flex-col gap-4">
-                            <div class="flex justify-between items-center text-white">
-                                <span class="font-bold text-sm">ธนาคารกสิกรไทย ( K PLUS )</span>
-                                <span class="kbank-btn text-[12px] font-bold bg-white/20 px-3 py-1 rounded-full">คัดลอก</span>
-                            </div>
-                            <div class="text-white font-bold text-[22px] tracking-widest">117-336760-7</div>
-                        </div>
-                    </div>
-
-                    <div class="bg-pink-50/90 border border-pink-200 rounded-2xl p-4 text-center">
-                        <p class="text-[13px] text-brown-600 font-medium">
-                            <span class="text-pink-500 font-bold">โน๊ตสลิปแปะสลิปทุกคร้้ง</span><br>
-                            เขียนบันทึกช่วยจำหรือโน้ตข้อความทุกครั้ง<br>
-                            “ ให้ค่า cookie,mn cakn “<br>
-                            หากลืมโอนเพิ่ม 1 บาท แล้วโน้ตมาใหม่<br>
-                            เพื่อเซฟป้องกันการโดนแอบอ้างค่ะ !
-                        </p>
-                    </div>
-
-                    <div class="bg-cream-100/90 border border-brown-200 rounded-2xl p-4 text-center">
-                        <p class="text-[13px] text-brown-600 font-bold mb-2">ช่องทางการติดต่อ</p>
-                        <p class="text-[12px] text-brown-500">Facebook : Ми саки<br>Instagram : Ir4ngelis</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function copyText(text, containerElement, type) {
+        // Modern Copy Clipboard with Button Text Mutation
+        function copyText(textToCopy, buttonElement) {
+            // สร้าง element ชั่วคราวเพื่อคัดลอก
             const textArea = document.createElement("textarea");
-            textArea.value = text;
+            textArea.value = textToCopy;
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
+
+            // แสดงแจ้งเตือนด้านล่าง (Toast)
             showToast();
+
+            // เปลี่ยนไอคอนและข้อความบนปุ่มชั่วคราว (Micro-interaction)
+            const originalHTML = buttonElement.innerHTML;
+            buttonElement.innerHTML = `<i class="fa-solid fa-check text-xs"></i> <span>สำเร็จ!</span>`;
+            buttonElement.disabled = true;
+            
+            setTimeout(() => {
+                buttonElement.innerHTML = originalHTML;
+                buttonElement.disabled = false;
+            }, 2000);
         }
 
+        // Show Toast Function
         function showToast() {
             const toast = document.getElementById('toast');
             toast.classList.remove('opacity-0', 'translate-y-4');
             toast.classList.add('opacity-100', 'translate-y-0');
+            
             setTimeout(() => {
                 toast.classList.remove('opacity-100', 'translate-y-0');
                 toast.classList.add('opacity-0', 'translate-y-4');
